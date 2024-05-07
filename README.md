@@ -3,7 +3,7 @@ Preparing effectively for the Certified Kubernetes Application Developer (CKAD) 
 
 
 
-### Create a new pod with the nginx image. Showing all containers running and aReadystatus
+### Create a new pod with the nginx image. Showing all containers running and a Readystatus
 
 <details><summary>show</summary>
 <p>
