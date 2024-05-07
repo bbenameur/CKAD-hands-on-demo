@@ -18,7 +18,7 @@ kubectl run nginx --image nginx
 </p>
 </details>
 
-### Create a new service exposing the pod as anodePort, which presents a working webserver configured in the previousstep
+### Create a new service exposing the pod as a nodePort, which presents a working webserver configured in the previousstep
 
 <details><summary>show</summary>
 <p>
@@ -47,7 +47,7 @@ spec:
     protocol: TCP
     targetPort: 80
   selector:
-    run: nginx // Add run: nginx selector 
+    run: nginx # Add run: nginx selector 
   type: NodePort
 status:
   loadBalancer: {}
@@ -66,8 +66,121 @@ kubectl get svc svc -o wide
 ```
 
 ```bash
-curl 10.110.220.208:5678
+NAME   TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE   SELECTOR
+svc    NodePort   10.110.220.208   <none>        5678:31030/TCP   20m   run=nginx
+```
+
+```bash
+curl 10.110.220.208:5678 // from the same vm
+```
+```bash
+curl 10.110.220.208:31030 // from the your local machine or navigator
 ```
 
 </p>
 </details>
+
+### Update the pod to run thenginx:1.11-alpineimage and re-verify you can view the webserver via a nodePort
+<details><summary>show</summary>
+<p>
+
+```bash
+kubectl edit pod nginx
+```
+
+```yaml
+ apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2024-05-07T20:21:50Z"
+  labels:
+    run: nginx
+  name: nginx
+  namespace: default
+  resourceVersion: "141816"
+  uid: a7e2720e-3a8e-46bc-af6f-93e1d1b55a88
+spec:
+  containers:
+  - image: nginx:1.11-alpine # change here
+    imagePullPolicy: Always
+
+```
+
+```bash
+>ctr:x!
+```
+
+```bash
+kubectl get pod nginx
+```
+
+```bash
+NAME    READY   STATUS    RESTARTS        AGE
+nginx   1/1     Running   1 (5m53s ago)   40m
+```
+
+
+```bash
+kubectl describe pod nginx
+```
+
+```bash
+Name:             nginx
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             ip-172-31-28-164/172.31.28.164
+Start Time:       Tue, 07 May 2024 20:21:50 +0000
+Labels:           run=nginx
+Annotations:      <none>
+Status:           Running
+IP:               10.0.2.145
+IPs:
+  IP:  10.0.2.145
+Containers:
+  nginx:
+    Container ID:   containerd://f9d93fb6dbd4d69d7e9de30747591d55feb95b31cd6da55ab8fcd1b8a2c6047b
+    Image:          nginx:1.11-alpine // => should be the new nginx version
+
+```
+
+```bash
+curl 10.110.220.208:5678 // from the same vm
+```
+```bash
+curl 10.110.220.208:31030 // from the your local machine or navigator
+```
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+
+```
+
+</p>
+</details>
+
+<p>
