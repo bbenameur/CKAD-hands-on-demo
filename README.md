@@ -15,6 +15,8 @@ kubectl run nginx --image nginx
 ```bash
  kubectl get pods -o=jsonpath='{range .items[*]}{range .status.containerStatuses[?(@.state.running)]}{"\tContainer Name: "}{.name}{"\tRunning: "}{.state.running}{"\tReadyStatus: "}{.ready}{"\n"}{end}{end}'
 ```
+</p>
+</details>
 
 ### Create a new service exposing the pod as anodePort, which presents a working webserver configured in the previousstep
 
