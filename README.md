@@ -15,5 +15,57 @@ kubectl run nginx --image nginx
 ```bash
  kubectl get pods -o=jsonpath='{range .items[*]}{range .status.containerStatuses[?(@.state.running)]}{"\tContainer Name: "}{.name}{"\tRunning: "}{.state.running}{"\tReadyStatus: "}{.ready}{"\n"}{end}{end}'
 ```
+
+### Create a new service exposing the pod as anodePort, which presents a working webserver configured in the previousstep
+
+<details><summary>show</summary>
+<p>
+
+```bash
+kubectl create service nodeport svc --tcp=5678:80 --dry-run -o yaml > svc.yaml
+```
+
+
+```bash
+vi svc.yaml
+```
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: svc
+  name: svc
+spec:
+  ports:
+  - name: 5678-80
+    port: 5678
+    protocol: TCP
+    targetPort: 80
+  selector:
+    run: nginx // Add run: nginx selector 
+  type: NodePort
+status:
+  loadBalancer: {}
+```
+
+```bash
+>ctr:x!
+```
+
+```bash
+kubectl apply -f svc.yaml
+```
+
+```bash
+kubectl get svc svc -o wide
+```
+
+```bash
+curl 10.110.220.208:5678
+```
+
 </p>
 </details>
