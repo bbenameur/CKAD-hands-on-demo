@@ -184,3 +184,31 @@ Commercial support is available at
 </details>
 
 <p>
+
+
+### Create a job which will run a container which sleeps for three seconds then stops
+
+<details><summary>show</summary>
+<p>
+
+```bash
+vim job.yaml
+```
+
+```yaml
+ kubectapiVersion: batch/v1
+kind: Job
+metadata:
+  name: my-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: my-container
+        image: busybox
+        command: ["sleep", "5"]
+      restartPolicy: Never
+```
+</p>
+</details>
+
