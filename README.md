@@ -211,7 +211,8 @@ spec:
 ```
 </p>
 </details>
-<!-- Empty section -->
+
+
 ### Deploy sample Pod with below configuration using kubectl.
 
 Container Image: nginx:1.18
