@@ -212,6 +212,72 @@ spec:
 </p>
 </details>
 <!-- Empty section -->
+### Deploy sample Pod with below configuration using kubectl.
+
+Container Image: nginx:1.18
+
+Pod Name: nginx-pod
+
+<details><summary>show</summary>
+<p>
+```bash
+bach@ip-172-31-23-202:~/LFD259/SOLUTIONS/s_08/metrics-server/manifests$ kubectl run nginx-pod --image nginx:1.18
+pod/nginx-pod created
+
+bach@ip-172-31-23-202:~/LFD259/SOLUTIONS/s_08/metrics-server/manifests$ kubectl get pod | grep nginx-pod
+nginx-pod                                  1/1     Running            0                6s
+bach@ip-172-31-23-202:~/LFD259/SOLUTIONS/s_08/metrics-server/manifests$
+```
+
+</p>
+</details>
+
+<!-- Empty section -->
+### 
+
+<details><summary>show</summary>
+<p>
+
+</p>
+</details>
+
+<!-- Empty section -->
+### 
+
+<details><summary>show</summary>
+<p>
+
+</p>
+</details>
+
+<!-- Empty section -->
+### 
+
+<details><summary>show</summary>
+<p>
+
+</p>
+</details>
+
+<!-- Empty section -->
+### 
+
+<details><summary>show</summary>
+<p>
+
+</p>
+</details>
+
+<!-- Empty section -->
+### 
+
+<details><summary>show</summary>
+<p>
+
+</p>
+</details>
+
+<!-- Empty section -->
 ### 
 
 <details><summary>show</summary>
