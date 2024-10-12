@@ -196,7 +196,7 @@ vim job.yaml
 ```
 
 ```yaml
- kubectapiVersion: batch/v1
+kubectapiVersion: batch/v1
 kind: Job
 metadata:
   name: my-job
