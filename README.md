@@ -237,14 +237,10 @@ pod/nginx-pod created
 
 <details><summary>show</summary>
 <p>
+
 ```bash
 
 bach@ip-172-31-23-202:~$ kubectl get pod | grep nginx-pod
-```
-
-```json
-
-nginx-pod                                  1/1     Running            0                6s
 
 ```
 </p>
